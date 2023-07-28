@@ -280,6 +280,10 @@ CLASS ZCL_DDIC_TO_JSON IMPLEMENTATION.
                                           | LENG:|        &&  ls_data-leng     &&
                                           | FIELDTEXT:|   &&  ls_data-ddtext.
 
+        data(lv_textnew) = escape( val = lv_ddtext format = cl_abap_format=>e_json_string ).
+        lv_ddtext = lv_textnew.
+        CLEAR:lv_textnew.
+
         CONCATENATE '{' '"' iv_fieldname '"' ':' '"' lv_ddtext '"' '}' INTO ev_json.
         CLEAR:lt_data,ls_data,lv_ddtext.
       WHEN cl_abap_typedescr=>kind_struct OR cl_abap_typedescr=>kind_table.
