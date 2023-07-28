@@ -197,7 +197,6 @@ CLASS ZCL_DDIC_TO_JSON IMPLEMENTATION.
       RETURN.
     ENDIF.
     CLEAR:gt_level.
-    REFRESH:gt_level.
     IF iv_fieldname IS INITIAL.
       iv_fieldname =  'ROOT'.
     ELSE.
@@ -246,6 +245,7 @@ CLASS ZCL_DDIC_TO_JSON IMPLEMENTATION.
             iv_json = ev_json.
         CONCATENATE '{' '"' iv_fieldname '"' ':' ev_json '}' INTO ev_json.
     ENDCASE.
+    free:gt_level.
     cl_demo_output=>display_json( ev_json ).  "If you want to make an interface, please comment out this code
   ENDMETHOD.
 
