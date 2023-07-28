@@ -251,6 +251,10 @@ CLASS ZCL_DDIC_TO_JSON IMPLEMENTATION.
 
     IF iv_fieldname IS INITIAL.
       iv_fieldname =  'ROOT'.
+    else.
+      data(lv_textnew) = escape( val = iv_fieldname format = cl_abap_format=>e_json_string ).
+      iv_fieldname = lv_textnew.
+      CLEAR:lv_textnew.
     ENDIF.
 
     CASE lr_typedesc->kind.
@@ -280,7 +284,7 @@ CLASS ZCL_DDIC_TO_JSON IMPLEMENTATION.
                                           | LENG:|        &&  ls_data-leng     &&
                                           | FIELDTEXT:|   &&  ls_data-ddtext.
 
-        data(lv_textnew) = escape( val = lv_ddtext format = cl_abap_format=>e_json_string ).
+        lv_textnew = escape( val = lv_ddtext format = cl_abap_format=>e_json_string ).
         lv_ddtext = lv_textnew.
         CLEAR:lv_textnew.
 
