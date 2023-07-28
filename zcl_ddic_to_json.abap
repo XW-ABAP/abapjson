@@ -85,6 +85,7 @@ CLASS ZCL_DDIC_TO_JSON IMPLEMENTATION.
           CONCATENATE iv_json ',' INTO iv_json.
         ENDIF.
         IF <ls_level>-inttype = 'u' OR <ls_level>-inttype = 'h' OR <ls_level>-inttype = 'v'.
+          CLEAR:ls_level.
           ls_level = CORRESPONDING #( <ls_level> ).
           CALL METHOD zcl_ddic_to_json=>convert_to_json
             EXPORTING
@@ -142,7 +143,6 @@ CLASS ZCL_DDIC_TO_JSON IMPLEMENTATION.
         ENDIF.
         IF <ls_level>-inttype = 'u' OR <ls_level>-inttype = 'h' OR <ls_level>-inttype = 'v'.
           CLEAR:ls_level.
-*          MOVE-CORRESPONDING <ls_level> TO ls_level.
           ls_level = CORRESPONDING #( <ls_level> ).
           CALL METHOD zcl_ddic_to_json=>convert_to_json
             EXPORTING
