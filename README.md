@@ -2,7 +2,13 @@
 sap abap DDIC to json
 
 
-step1
+step 1
+
+You need  se24 create a class name value is zcl_ddic_to_json
+
+copy my demo into your class save and active!
+
+step 2
 test class zcl_ddic_to_json
 open sy-tcode: se24 
 
