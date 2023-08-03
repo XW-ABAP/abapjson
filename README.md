@@ -15,6 +15,10 @@ open sy-tcode: se24
 ![image](https://github.com/XW-bmw/abapjson/assets/29417134/9eb2d12d-a0c5-4d03-b8f9-bb0f127b73f2)
 
 
+Updated to add one of the switch iv_output parameters, when this is X, the JSON is displayed, the other parameter is IV_TCHECK, when this parameter is X, e.g. pa0001 will get the [{}] format json
+
+
+
 
 You'll see the presentation.
 
