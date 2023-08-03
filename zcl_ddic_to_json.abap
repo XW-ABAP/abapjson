@@ -1,12 +1,12 @@
-CLASS zcl_ddic_to_json DEFINITION
-  PUBLIC
-  FINAL
-  CREATE PUBLIC .
+class ZCL_DDIC_TO_JSON definition
+  public
+  final
+  create public .
 
-  PUBLIC SECTION.
+public section.
 
-    TYPES:
-      BEGIN OF ts_s_level,
+  types:
+    BEGIN OF ts_s_level,
         level      TYPE i, " ZLEVERL type i fieldtext level
         position   TYPE tabfdpos,
         filedname  TYPE fieldname,
@@ -15,22 +15,24 @@ CLASS zcl_ddic_to_json DEFINITION
         ddtext     TYPE ddtext,
         rollnameup TYPE rollname,
       END OF ts_s_level .
-    TYPES:
-      tt_t_level TYPE TABLE OF ts_s_level .
-    TYPES:
-      tt_t_rollname TYPE RANGE OF rollname .
+  types:
+    tt_t_level TYPE TABLE OF ts_s_level .
+  types:
+    tt_t_rollname TYPE RANGE OF rollname .
 
-    CLASS-DATA gt_level TYPE tt_t_level .
+  class-data GT_LEVEL type TT_T_LEVEL .
 
-    METHODS show_alv
-      IMPORTING
-        !it_tab TYPE tt_t_level .
-    CLASS-METHODS ddic_to_json
-      IMPORTING
-        !iv_data            TYPE rollname
-        VALUE(iv_fieldname) TYPE fieldname
-      RETURNING
-        VALUE(ev_json)      TYPE string .
+  methods SHOW_ALV
+    importing
+      !IT_TAB type TT_T_LEVEL .
+  class-methods DDIC_TO_JSON
+    importing
+      !IV_TCHECK type CHAR1 optional
+      !IV_OUTPUT type CHAR1 optional
+      !IV_DATA type ROLLNAME
+      value(IV_FIELDNAME) type FIELDNAME
+    returning
+      value(EV_JSON) type STRING .
   PROTECTED SECTION.
   PRIVATE SECTION.
 
@@ -167,6 +169,8 @@ CLASS ZCL_DDIC_TO_JSON IMPLEMENTATION.
 * <SIGNATURE>---------------------------------------------------------------------------------------+
 * | Static Public Method ZCL_DDIC_TO_JSON=>DDIC_TO_JSON
 * +-------------------------------------------------------------------------------------------------+
+* | [--->] IV_TCHECK                      TYPE        CHAR1(optional)
+* | [--->] IV_OUTPUT                      TYPE        CHAR1(optional)
 * | [--->] IV_DATA                        TYPE        ROLLNAME
 * | [--->] IV_FIELDNAME                   TYPE        FIELDNAME
 * | [<-()] EV_JSON                        TYPE        STRING
@@ -243,10 +247,18 @@ CLASS ZCL_DDIC_TO_JSON IMPLEMENTATION.
             iv_data = iv_data
           CHANGING
             iv_json = ev_json.
-        CONCATENATE '{' '"' iv_fieldname '"' ':' ev_json '}' INTO ev_json.
+
+        IF iv_tcheck IS NOT INITIAL.
+          CONCATENATE '[{' '"' iv_fieldname '"' ':' ev_json '}]' INTO ev_json.
+        ELSE.
+          CONCATENATE '{' '"' iv_fieldname '"' ':' ev_json '}' INTO ev_json.
+        ENDIF.
     ENDCASE.
-    free:gt_level.
-    cl_demo_output=>display_json( ev_json ).  "If you want to make an interface, please comment out this code
+    FREE:gt_level.
+
+    IF iv_output = 'X'.
+      cl_demo_output=>display_json( ev_json ).  "If you want to make an interface, please comment out this code
+    ENDIF.
   ENDMETHOD.
 
 
