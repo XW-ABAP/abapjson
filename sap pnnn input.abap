@@ -15,7 +15,7 @@ FUNCTION zXXX_hr_pafm_pannnn_up.
   FIELD-SYMBOLS <ls_secondary> TYPE any.
   DATA lr_primary_ref TYPE REF TO data.
   DATA lr_secondary_ref TYPE REF TO data.
-  *FIELD-SYMBOLS:<lt_table>       TYPE STANDARD  TABLE,
+  * FIELD-SYMBOLS:<lt_table>       TYPE STANDARD  TABLE,
   *              <ls_wa>          TYPE any,
   *              <lt_tablesecond> TYPE STANDARD  TABLE,
   *              <ls_wasecond>    TYPE any.
