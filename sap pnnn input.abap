@@ -7,6 +7,7 @@ FUNCTION zXXX_hr_pafm_pannnn_up.
 *"     VALUE(IV_NOCOMMIT) TYPE  BAPI_STAND-NO_COMMIT OPTIONAL
 *"     VALUE(IV_OPERATION) TYPE  PSPAR-ACTIO DEFAULT 'MOD'
 *"----------------------------------------------------------------------
+  "Sharing this code is to prove to the world that continuous learning can lead to reaching the pinnacle.
   DATA:lr_wa    TYPE REF TO data.
   DATA:lr_descr    TYPE REF TO cl_abap_structdescr.
   DATA: ls_returninfo TYPE bapireturn1.    "Return Parameter
